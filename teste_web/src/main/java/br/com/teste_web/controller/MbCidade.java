@@ -8,15 +8,15 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "mbCidade")
-@RequestScoped
+@SessionScoped
+
 public class MbCidade implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
     private Cidade cidade = new Cidade();
     private List<Cidade> cidades;
 
@@ -30,14 +30,14 @@ public class MbCidade implements Serializable {
 
     public String limpCidade() {
         cidade = new Cidade();
-        return editCidade();
+        return "/restrict/cadastrarcidade.faces";
     }
 
     public String editCidade() {
         return "/restrict/cadastrarcidade.faces";
     }
 
-    public String addCidade() {
+    private String addCidade() {
         if (cidade.getIdCidade() == null || cidade.getIdCidade() == 0) {
             insertCidade();
         } else {
@@ -50,20 +50,21 @@ public class MbCidade implements Serializable {
     private void insertCidade() {
         cidadeDAO().save(cidade);
         FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "GravaÃ§Ã£o efetuada com sucesso", ""));
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
     }
 
     private void updateCidade() {
         cidadeDAO().update(cidade);
+
         FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "AtualizaÃ§Ã£o efetuada com sucesso", ""));
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso", ""));
     }
-    
-    public void deleteCidade(){
-        cidadeDAO().remove(cidade);        
+
+    public void deleteCidade() {
+        cidadeDAO().remove(cidade);
     }
-    
-    public List<Cidade> getCidades() {       
+
+    public List<Cidade> getCidades() {
         cidades = cidadeDAO().getEntities();
         return cidades;
     }
@@ -79,5 +80,5 @@ public class MbCidade implements Serializable {
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
-        
+
 }
