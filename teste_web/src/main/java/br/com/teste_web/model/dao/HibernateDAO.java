@@ -1,5 +1,6 @@
 package br.com.teste_web.model.dao;
 
+import br.com.teste_web.model.entities.Cidade;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Session;
@@ -12,6 +13,10 @@ public class HibernateDAO<T> implements InterfaceDAO<T>, Serializable {
     
     private Class<T> classe;
     private Session session;
+
+    public HibernateDAO(Class<Cidade> aClass, Session requestSession) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     @Override
     public void save(T entity) {
