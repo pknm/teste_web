@@ -25,11 +25,7 @@
     </session-config>
     
     <!--  Configurações do tema do PrimeFaces  -->
-    <dependency>
-        <groupId>org.primefaces.themes</groupId>
-        <artifactId>redmond</artifactId>
-        <version>1.0.4</version>
-    </dependency>
+   
     
     <context-param>
         <param-name>primefaces.THEME</param-name>
